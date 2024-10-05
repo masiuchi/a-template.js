@@ -37,7 +37,6 @@
     "watch": "^1.0.1"
   },
   "dependencies": {
-    "delegate": "^3.1.2",
     "ie-array-find-polyfill": "^1.1.0",
     "morphdom": "^2.3.1"
   }
