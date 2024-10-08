@@ -36,8 +36,7 @@
     "licensify": "^3.1.2",
     "node-cmd": "^2.0.0",
     "np": "^10.0.7",
-    "uglifyjs": "^2.4.10",
-    "watch": "^1.0.1"
+    "uglifyjs": "^2.4.10"
   },
   "dependencies": {
     "ie-array-find-polyfill": "^1.1.0",
