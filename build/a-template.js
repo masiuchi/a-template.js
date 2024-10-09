@@ -776,6 +776,7 @@ var aTemplate = function () {
     }
     var templates = this.templates;
     var length = templates.length;
+
     for (var i = 0, n = length; i < n; i += 1) {
       var template = this.templates[i];
       var html = (0, _util.selector)('#' + template).innerHTML;
@@ -793,6 +794,7 @@ var aTemplate = function () {
         var data = target.getAttribute('data-bind');
         var attr = target.getAttribute('href');
         var value = target.value;
+
         if (attr) {
           value = value.replace('#', '');
         }
@@ -926,6 +928,7 @@ var aTemplate = function () {
       var ret = '';
       var strings = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
       var length = strings.length;
+
       for (var i = 0; i < limit; i += 1) {
         ret += strings.charAt(Math.floor(this.getRand(0, length)));
       }
@@ -986,7 +989,7 @@ var aTemplate = function () {
       var touchnots = html.match(/<!-- BEGIN ([\w\-\.ぁ-んァ-ヶ亜-熙]+):touchnot#([\w\-\.ぁ-んァ-ヶ亜-熙]+) -->/g);
       var exists = html.match(/<!-- BEGIN ([\w\-\.ぁ-んァ-ヶ亜-熙]+):exist -->/g);
       var empties = html.match(/<!-- BEGIN ([\w\-\.ぁ-んァ-ヶ亜-熙]+):empty -->/g);
-      /* タッチブロック解決*/
+      /* タッチブロック解決 */
       if (touchs) {
         for (var k = 0, n = touchs.length; k < n; k += 1) {
           var start = touchs[k];
@@ -1002,7 +1005,7 @@ var aTemplate = function () {
           });
         }
       }
-      /* タッチノットブロック解決*/
+      /* タッチノットブロック解決 */
       if (touchnots) {
         for (var _k = 0, _n = touchnots.length; _k < _n; _k += 1) {
           var _start = touchnots[_k];
@@ -1018,7 +1021,7 @@ var aTemplate = function () {
           });
         }
       }
-      /* existブロックを解決*/
+      /* existブロックを解決 */
       if (exists) {
         for (var _k2 = 0, _n2 = exists.length; _k2 < _n2; _k2 += 1) {
           var _start2 = exists[_k2];
@@ -1034,7 +1037,7 @@ var aTemplate = function () {
           });
         }
       }
-      /* emptyブロックを解決*/
+      /* emptyブロックを解決 */
       if (empties) {
         for (var _k3 = 0, _n3 = empties.length; _k3 < _n3; _k3 += 1) {
           var _start3 = empties[_k3];
@@ -1050,7 +1053,7 @@ var aTemplate = function () {
           });
         }
       }
-      /* 変数解決*/
+      /* 変数解決 */
       html = html.replace(/{([\w\-\.ぁ-んァ-ヶ亜-熙]+)}(\[([\w\-\.ぁ-んァ-ヶ亜-熙]+)\])*/g, function (n, key3, key4, converter) {
         var data = void 0;
         if ('' + key3 === 'i') {
@@ -1074,7 +1077,8 @@ var aTemplate = function () {
       });
       return html;
     }
-    /* 絶対パス形式の変数を解決*/
+
+    /* 絶対パス形式の変数を解決 */
 
   }, {
     key: 'resolveAbsBlock',
@@ -1116,7 +1120,7 @@ var aTemplate = function () {
     value: function resolveLoop(html) {
       var loop = /<!-- BEGIN ([\w\-\.ぁ-んァ-ヶ亜-熙]+?):loop -->(([\n\r\t]|.)*?)<!-- END ([\w\-\.ぁ-んァ-ヶ亜-熙]+?):loop -->/g;
       var that = this;
-      /* ループ文解決*/
+      /* ループ文解決 */
       html = html.replace(loop, function (m, key, val) {
         var keyItem = that.getDataByString(key);
         var keys = [];
@@ -1131,7 +1135,7 @@ var aTemplate = function () {
             ret += that.resolveBlock(val, keys[i], i);
           }
         }
-        /* エスケープ削除*/
+        /* エスケープ削除 */
         ret = ret.replace(/\\([^\\])/g, '$1');
         return ret;
       });
@@ -1141,6 +1145,7 @@ var aTemplate = function () {
     key: 'removeData',
     value: function removeData(arr) {
       var data = this.data;
+
       Object.keys(data).forEach(function (i) {
         for (var t = 0, n = arr.length; t < n; t += 1) {
           if (i === arr[t]) {
@@ -1176,32 +1181,34 @@ var aTemplate = function () {
         return '';
       }
       var data = this.data;
-      /* インクルード解決*/
+      /* インクルード解決 */
+
       html = this.resolveInclude(html);
-      /* with解決*/
+      /* with解決 */
       html = this.resolveWith(html);
-      /* ループ解決*/
+      /* ループ解決 */
       while (this.hasLoop(html)) {
         html = this.resolveLoop(html);
       }
-      /* 変数解決*/
+      /* 変数解決 */
       html = this.resolveBlock(html, data);
-      /* エスケープ削除*/
+      /* エスケープ削除 */
       html = html.replace(/\\([^\\])/g, '$1');
-      /* 絶対パスで指定された変数を解決*/
+      /* 絶対パスで指定された変数を解決 */
       html = this.resolveAbsBlock(html);
-      /* 空行削除*/
+      /* 空行削除 */
       return html.replace(/^([\t ])*\n/gm, '');
     }
   }, {
     key: 'update',
-    value: function update() {
+    value: function update(renderWay, part) {
       var _this5 = this;
 
-      var renderWay = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 'html';
-      var part = arguments[1];
-
+      if (typeof renderWay === 'undefined') {
+        renderWay = 'html';
+      }
       var templates = this.templates;
+
       if (this.beforeUpdated) {
         this.beforeUpdated();
       }
@@ -1253,6 +1260,7 @@ var aTemplate = function () {
       var _this6 = this;
 
       var templates = this.templates;
+
       for (var i = 0, n = templates.length; i < n; i += 1) {
         var temp = templates[i];
         var _template = (0, _util.selector)('[data-id=\'' + temp + '\']');
