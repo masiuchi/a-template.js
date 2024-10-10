@@ -729,38 +729,35 @@ var morphdom = morphdomFactory(morphAttrs);
 module.exports = morphdom;
 
 },{}],3:[function(require,module,exports){
-'use strict';
+"use strict";
 
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-require('ie-array-find-polyfill');
-
-var _morphdom = require('morphdom');
-
-var _morphdom2 = _interopRequireDefault(_morphdom);
-
-var _util = require('./util');
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
+exports["default"] = void 0;
+require("ie-array-find-polyfill");
+var _morphdom = _interopRequireDefault(require("morphdom"));
+var _util = require("./util");
+function _interopRequireDefault(e) { return e && e.__esModule ? e : { "default": e }; }
+function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (o) { return typeof o; } : function (o) { return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o; }, _typeof(o); }
+function _toConsumableArray(r) { return _arrayWithoutHoles(r) || _iterableToArray(r) || _unsupportedIterableToArray(r) || _nonIterableSpread(); }
+function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+function _unsupportedIterableToArray(r, a) { if (r) { if ("string" == typeof r) return _arrayLikeToArray(r, a); var t = {}.toString.call(r).slice(8, -1); return "Object" === t && r.constructor && (t = r.constructor.name), "Map" === t || "Set" === t ? Array.from(r) : "Arguments" === t || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(t) ? _arrayLikeToArray(r, a) : void 0; } }
+function _iterableToArray(r) { if ("undefined" != typeof Symbol && null != r[Symbol.iterator] || null != r["@@iterator"]) return Array.from(r); }
+function _arrayWithoutHoles(r) { if (Array.isArray(r)) return _arrayLikeToArray(r); }
+function _arrayLikeToArray(r, a) { (null == a || a > r.length) && (a = r.length); for (var e = 0, n = Array(a); e < a; e++) n[e] = r[e]; return n; }
+function _classCallCheck(a, n) { if (!(a instanceof n)) throw new TypeError("Cannot call a class as a function"); }
+function _defineProperties(e, r) { for (var t = 0; t < r.length; t++) { var o = r[t]; o.enumerable = o.enumerable || !1, o.configurable = !0, "value" in o && (o.writable = !0), Object.defineProperty(e, _toPropertyKey(o.key), o); } }
+function _createClass(e, r, t) { return r && _defineProperties(e.prototype, r), t && _defineProperties(e, t), Object.defineProperty(e, "prototype", { writable: !1 }), e; }
+function _toPropertyKey(t) { var i = _toPrimitive(t, "string"); return "symbol" == _typeof(i) ? i : i + ""; }
+function _toPrimitive(t, r) { if ("object" != _typeof(t) || !t) return t; var e = t[Symbol.toPrimitive]; if (void 0 !== e) { var i = e.call(t, r || "default"); if ("object" != _typeof(i)) return i; throw new TypeError("@@toPrimitive must return a primitive value."); } return ("string" === r ? String : Number)(t); }
 var eventType = 'input paste copy click change keydown keyup keypress contextmenu mouseup mousedown mousemove touchstart touchend touchmove compositionstart compositionend focus';
 var bindType = 'input change click';
-var dataAction = eventType.replace(/([a-z]+)/g, '[data-action-$1],') + '[data-action]';
-
-var aTemplate = function () {
+var dataAction = "".concat(eventType.replace(/([a-z]+)/g, '[data-action-$1],'), "[data-action]");
+var aTemplate = exports["default"] = /*#__PURE__*/function () {
   function aTemplate(opt) {
     var _this = this;
-
     _classCallCheck(this, aTemplate);
-
     this.atemplate = [];
     this.events = [];
     if (opt) {
@@ -776,31 +773,31 @@ var aTemplate = function () {
     }
     var templates = this.templates;
     var length = templates.length;
-
     for (var i = 0, n = length; i < n; i += 1) {
       var template = this.templates[i];
-      var html = (0, _util.selector)('#' + template).innerHTML;
-      this.atemplate.push({ id: template, html: html, binded: false });
+      var html = (0, _util.selector)("#".concat(template)).innerHTML;
+      this.atemplate.push({
+        id: template,
+        html: html,
+        binded: false
+      });
     }
   }
-
-  _createClass(aTemplate, [{
-    key: 'addDataBind',
+  return _createClass(aTemplate, [{
+    key: "addDataBind",
     value: function addDataBind(ele) {
       var _this2 = this;
-
       (0, _util.on)(ele, '[data-bind]', bindType, function (e) {
         var target = e.delegateTarget;
         var data = target.getAttribute('data-bind');
         var attr = target.getAttribute('href');
         var value = target.value;
-
         if (attr) {
           value = value.replace('#', '');
         }
         if (target.getAttribute('type') === 'checkbox') {
           var arr = [];
-          var items = document.querySelectorAll('[data-bind="' + data + '"]');
+          var items = document.querySelectorAll("[data-bind=\"".concat(data, "\"]"));
           [].forEach.call(items, function (item) {
             if (item.checked) {
               arr.push(item.value);
@@ -817,22 +814,21 @@ var aTemplate = function () {
       });
     }
   }, {
-    key: 'addActionBind',
+    key: "addActionBind",
     value: function addActionBind(ele) {
       var _this3 = this;
-
       (0, _util.on)(ele, dataAction, eventType, function (e) {
         var target = e.delegateTarget;
         var events = eventType.split(' ');
         var action = 'action';
         events.forEach(function (event) {
-          if (target.getAttribute('data-action-' + event)) {
+          if (target.getAttribute("data-action-".concat(event))) {
             if (e.type === event) {
-              action += '-' + event;
+              action += "-".concat(event);
             }
           }
         });
-        var string = target.getAttribute('data-' + action);
+        var string = target.getAttribute("data-".concat(action));
         if (!string) {
           return;
         }
@@ -841,9 +837,8 @@ var aTemplate = function () {
         var pts = parameter.split(','); // 引き数
         _this3.e = e;
         if (_this3.method && _this3.method[method]) {
-          var _method;
-
-          (_method = _this3.method)[method].apply(_method, _toConsumableArray(pts));
+          var _this3$method;
+          (_this3$method = _this3.method)[method].apply(_this3$method, _toConsumableArray(pts));
         } else if (_this3[method]) {
           _this3[method].apply(_this3, _toConsumableArray(pts));
         }
@@ -855,16 +850,20 @@ var aTemplate = function () {
       });
     }
   }, {
-    key: 'removeTemplateEvents',
+    key: "removeTemplateEvents",
     value: function removeTemplateEvents() {
       this.events.forEach(function (event) {
         (0, _util.off)(event.element, event.selector, event.event);
       });
     }
   }, {
-    key: 'addTemplate',
+    key: "addTemplate",
     value: function addTemplate(id, html) {
-      this.atemplate.push({ id: id, html: html, binded: false });
+      this.atemplate.push({
+        id: id,
+        html: html,
+        binded: false
+      });
       this.templates.push(id);
     }
 
@@ -886,23 +885,21 @@ var aTemplate = function () {
     //   });
     //   return $.when(...promises);
     // }
-
   }, {
-    key: 'getData',
+    key: "getData",
     value: function getData() {
       return JSON.parse(JSON.stringify(this.data));
     }
   }, {
-    key: 'saveData',
+    key: "saveData",
     value: function saveData(key) {
       var data = JSON.stringify(this.data);
       localStorage.setItem(key, data);
     }
   }, {
-    key: 'setData',
+    key: "setData",
     value: function setData(opt) {
       var _this4 = this;
-
       Object.keys(opt).forEach(function (key) {
         if (typeof opt[key] !== 'function') {
           _this4.data[key] = opt[key];
@@ -910,7 +907,7 @@ var aTemplate = function () {
       });
     }
   }, {
-    key: 'loadData',
+    key: "loadData",
     value: function loadData(key) {
       var data = JSON.parse(localStorage.getItem(key));
       if (data) {
@@ -918,24 +915,23 @@ var aTemplate = function () {
       }
     }
   }, {
-    key: 'getRand',
+    key: "getRand",
     value: function getRand(a, b) {
       return ~~(Math.random() * (b - a + 1)) + a;
     }
   }, {
-    key: 'getRandText',
+    key: "getRandText",
     value: function getRandText(limit) {
       var ret = '';
       var strings = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
       var length = strings.length;
-
       for (var i = 0; i < limit; i += 1) {
         ret += strings.charAt(Math.floor(this.getRand(0, length)));
       }
       return ret;
     }
   }, {
-    key: 'getDataFromObj',
+    key: "getDataFromObj",
     value: function getDataFromObj(s, o) {
       s = s.replace(/\[([\w\-\.ぁ-んァ-ヶ亜-熙]+)\]/g, '.$1'); // convert indexes to properties
       s = s.replace(/^\./, ''); // strip leading dot
@@ -951,13 +947,13 @@ var aTemplate = function () {
       return o;
     }
   }, {
-    key: 'getDataByString',
+    key: "getDataByString",
     value: function getDataByString(s) {
       var o = this.data;
       return this.getDataFromObj(s, o);
     }
   }, {
-    key: 'updateDataByString',
+    key: "updateDataByString",
     value: function updateDataByString(path, newValue) {
       var object = this.data;
       var stack = path.split('.');
@@ -967,7 +963,7 @@ var aTemplate = function () {
       object[stack.shift()] = newValue;
     }
   }, {
-    key: 'removeDataByString',
+    key: "removeDataByString",
     value: function removeDataByString(path) {
       var object = this.data;
       var stack = path.split('.');
@@ -982,7 +978,7 @@ var aTemplate = function () {
       }
     }
   }, {
-    key: 'resolveBlock',
+    key: "resolveBlock",
     value: function resolveBlock(html, item, i) {
       var that = this;
       var touchs = html.match(/<!-- BEGIN ([\w\-\.ぁ-んァ-ヶ亜-熙]+):touch#([\w\-\.ぁ-んァ-ヶ亜-熙]+) -->/g);
@@ -995,10 +991,10 @@ var aTemplate = function () {
           var start = touchs[k];
           start = start.replace(/([\w\-\.ぁ-んァ-ヶ亜-熙]+):touch#([\w\-\.ぁ-んァ-ヶ亜-熙]+)/, '($1):touch#($2)');
           var end = start.replace(/BEGIN/, 'END');
-          var reg = new RegExp(start + '(([\\n\\r\\t]|.)*?)' + end, 'g');
+          var reg = new RegExp("".concat(start, "(([\\n\\r\\t]|.)*?)").concat(end), 'g');
           html = html.replace(reg, function (m, key2, val, next) {
             var itemkey = typeof item[key2] === 'function' ? item[key2].apply(that) : that.getDataFromObj(key2, item);
-            if ('' + itemkey === val) {
+            if ("".concat(itemkey) === val) {
               return next;
             }
             return '';
@@ -1011,10 +1007,10 @@ var aTemplate = function () {
           var _start = touchnots[_k];
           _start = _start.replace(/([\w\-\.ぁ-んァ-ヶ亜-熙]+):touchnot#([\w\-\.ぁ-んァ-ヶ亜-熙]+)/, '($1):touchnot#($2)');
           var _end = _start.replace(/BEGIN/, 'END');
-          var _reg = new RegExp(_start + '(([\\n\\r\\t]|.)*?)' + _end, 'g');
+          var _reg = new RegExp("".concat(_start, "(([\\n\\r\\t]|.)*?)").concat(_end), 'g');
           html = html.replace(_reg, function (m, key2, val, next) {
             var itemkey = typeof item[key2] === 'function' ? item[key2].apply(that) : that.getDataFromObj(key2, item);
-            if ('' + itemkey !== val) {
+            if ("".concat(itemkey) !== val) {
               return next;
             }
             return '';
@@ -1027,7 +1023,7 @@ var aTemplate = function () {
           var _start2 = exists[_k2];
           _start2 = _start2.replace(/([\w\-\.ぁ-んァ-ヶ亜-熙]+):exist/, '($1):exist');
           var _end2 = _start2.replace(/BEGIN/, 'END');
-          var _reg2 = new RegExp(_start2 + '(([\\n\\r\\t]|.)*?)' + _end2, 'g');
+          var _reg2 = new RegExp("".concat(_start2, "(([\\n\\r\\t]|.)*?)").concat(_end2), 'g');
           html = html.replace(_reg2, function (m, key2, next) {
             var itemkey = typeof item[key2] === 'function' ? item[key2].apply(that) : that.getDataFromObj(key2, item);
             if (itemkey || itemkey === 0) {
@@ -1043,7 +1039,7 @@ var aTemplate = function () {
           var _start3 = empties[_k3];
           _start3 = _start3.replace(/([\w\-\.ぁ-んァ-ヶ亜-熙]+):empty/, '($1):empty');
           var _end3 = _start3.replace(/BEGIN/, 'END');
-          var empty = new RegExp(_start3 + '(([\\n\\r\\t]|.)*?)' + _end3, 'g');
+          var empty = new RegExp("".concat(_start3, "(([\\n\\r\\t]|.)*?)").concat(_end3), 'g');
           html = html.replace(empty, function (m, key2, next) {
             var itemkey = typeof item[key2] === 'function' ? item[key2].apply(that) : that.getDataFromObj(key2, item);
             if (!itemkey && itemkey !== 0) {
@@ -1055,8 +1051,8 @@ var aTemplate = function () {
       }
       /* 変数解決 */
       html = html.replace(/{([\w\-\.ぁ-んァ-ヶ亜-熙]+)}(\[([\w\-\.ぁ-んァ-ヶ亜-熙]+)\])*/g, function (n, key3, key4, converter) {
-        var data = void 0;
-        if ('' + key3 === 'i') {
+        var data;
+        if ("".concat(key3) === 'i') {
           data = i;
         } else if (item[key3] || item[key3] === 0) {
           if (typeof item[key3] === 'function') {
@@ -1079,9 +1075,8 @@ var aTemplate = function () {
     }
 
     /* 絶対パス形式の変数を解決 */
-
   }, {
-    key: 'resolveAbsBlock',
+    key: "resolveAbsBlock",
     value: function resolveAbsBlock(html) {
       var that = this;
       html = html.replace(/{(.*?)}/g, function (n, key3) {
@@ -1097,26 +1092,26 @@ var aTemplate = function () {
       return html;
     }
   }, {
-    key: 'resolveInclude',
+    key: "resolveInclude",
     value: function resolveInclude(html) {
       var include = /<!-- #include id="(.*?)" -->/g;
       html = html.replace(include, function (m, key) {
-        return (0, _util.selector)('#' + key).innerHTML;
+        return (0, _util.selector)("#".concat(key)).innerHTML;
       });
       return html;
     }
   }, {
-    key: 'resolveWith',
+    key: "resolveWith",
     value: function resolveWith(html) {
       var width = /<!-- BEGIN ([\w\-\.ぁ-んァ-ヶ亜-熙]+):with -->(([\n\r\t]|.)*?)<!-- END ([\w\-\.ぁ-んァ-ヶ亜-熙]+):with -->/g;
       html = html.replace(width, function (m, key) {
-        m = m.replace(/data\-bind=['"](.*?)['"]/g, 'data-bind=\'' + key + '.$1\'');
+        m = m.replace(/data\-bind=['"](.*?)['"]/g, "data-bind='".concat(key, ".$1'"));
         return m;
       });
       return html;
     }
   }, {
-    key: 'resolveLoop',
+    key: "resolveLoop",
     value: function resolveLoop(html) {
       var loop = /<!-- BEGIN ([\w\-\.ぁ-んァ-ヶ亜-熙]+?):loop -->(([\n\r\t]|.)*?)<!-- END ([\w\-\.ぁ-んァ-ヶ亜-熙]+?):loop -->/g;
       var that = this;
@@ -1142,10 +1137,9 @@ var aTemplate = function () {
       return html;
     }
   }, {
-    key: 'removeData',
+    key: "removeData",
     value: function removeData(arr) {
       var data = this.data;
-
       Object.keys(data).forEach(function (i) {
         for (var t = 0, n = arr.length; t < n; t += 1) {
           if (i === arr[t]) {
@@ -1156,7 +1150,7 @@ var aTemplate = function () {
       return this;
     }
   }, {
-    key: 'hasLoop',
+    key: "hasLoop",
     value: function hasLoop(txt) {
       var loop = /<!-- BEGIN ([\w\-\.ぁ-んァ-ヶ亜-熙]+?):loop -->(([\n\r\t]|.)*?)<!-- END ([\w\-\.ぁ-んァ-ヶ亜-熙]+?):loop -->/g;
       if (txt.match(loop)) {
@@ -1165,7 +1159,7 @@ var aTemplate = function () {
       return false;
     }
   }, {
-    key: 'getHtml',
+    key: "getHtml",
     value: function getHtml(query, row) {
       var template = this.atemplate.find(function (item) {
         return item.id === query;
@@ -1182,7 +1176,6 @@ var aTemplate = function () {
       }
       var data = this.data;
       /* インクルード解決 */
-
       html = this.resolveInclude(html);
       /* with解決 */
       html = this.resolveWith(html);
@@ -1200,30 +1193,27 @@ var aTemplate = function () {
       return html.replace(/^([\t ])*\n/gm, '');
     }
   }, {
-    key: 'update',
+    key: "update",
     value: function update(renderWay, part) {
       var _this5 = this;
-
       if (typeof renderWay === 'undefined') {
         renderWay = 'html';
       }
       var templates = this.templates;
-
       if (this.beforeUpdated) {
         this.beforeUpdated();
       }
-
-      var _loop = function _loop(i, n) {
+      var _loop = function _loop() {
         var tem = templates[i];
-        var query = '#' + tem;
+        var query = "#".concat(tem);
         var html = _this5.getHtml(tem);
-        var target = (0, _util.selector)('[data-id=\'' + tem + '\']');
+        var target = (0, _util.selector)("[data-id='".concat(tem, "']"));
         if (!target) {
-          (0, _util.selector)(query).insertAdjacentHTML('afterend', '<div data-id="' + tem + '"></div>');
+          (0, _util.selector)(query).insertAdjacentHTML('afterend', "<div data-id=\"".concat(tem, "\"></div>"));
           if (renderWay === 'text') {
-            (0, _util.selector)('[data-id=\'' + tem + '\']').innerText = html;
+            (0, _util.selector)("[data-id='".concat(tem, "']")).innerText = html;
           } else {
-            (0, _util.selector)('[data-id=\'' + tem + '\']').innerHTML = html;
+            (0, _util.selector)("[data-id='".concat(tem, "']")).innerHTML = html;
           }
         } else if (renderWay === 'text') {
           target.innerText = html;
@@ -1231,22 +1221,21 @@ var aTemplate = function () {
           var doc = document.createElement('div');
           doc.innerHTML = html;
           var partHtml = doc.querySelector(part).outerHTML;
-          (0, _morphdom2.default)(target.querySelector(part), partHtml);
+          (0, _morphdom["default"])(target.querySelector(part), partHtml);
         } else {
-          (0, _morphdom2.default)(target, '<div data-id=\'' + tem + '\'>' + html + '</div>');
+          (0, _morphdom["default"])(target, "<div data-id='".concat(tem, "'>").concat(html, "</div>"));
         }
         var template = _this5.atemplate.find(function (item) {
           return item.id === tem;
         });
         if (!template.binded) {
           template.binded = true;
-          _this5.addDataBind((0, _util.selector)('[data-id=\'' + tem + '\']'));
-          _this5.addActionBind((0, _util.selector)('[data-id=\'' + tem + '\']'));
+          _this5.addDataBind((0, _util.selector)("[data-id='".concat(tem, "']")));
+          _this5.addActionBind((0, _util.selector)("[data-id='".concat(tem, "']")));
         }
       };
-
       for (var i = 0, n = templates.length; i < n; i += 1) {
-        _loop(i, n);
+        _loop();
       }
       this.updateBindingData(part);
       if (this.onUpdated) {
@@ -1255,19 +1244,17 @@ var aTemplate = function () {
       return this;
     }
   }, {
-    key: 'updateBindingData',
+    key: "updateBindingData",
     value: function updateBindingData(part) {
       var _this6 = this;
-
       var templates = this.templates;
-
       for (var i = 0, n = templates.length; i < n; i += 1) {
         var temp = templates[i];
-        var _template = (0, _util.selector)('[data-id=\'' + temp + '\']');
+        var template = (0, _util.selector)("[data-id='".concat(temp, "']"));
         if (part) {
-          _template = _template.querySelector(part);
+          template = template.querySelector(part);
         }
-        var binds = _template.querySelectorAll('[data-bind]');
+        var binds = template.querySelectorAll('[data-bind]');
         [].forEach.call(binds, function (item) {
           var data = _this6.getDataByString(item.getAttribute('data-bind'));
           if (item.getAttribute('type') === 'checkbox' || item.getAttribute('type') === 'radio') {
@@ -1280,7 +1267,7 @@ var aTemplate = function () {
             // }
           }
         });
-        var onewaybinds = _template.querySelectorAll('[data-bind-oneway]');
+        var onewaybinds = template.querySelectorAll('[data-bind-oneway]');
         [].forEach.call(onewaybinds, function (item) {
           var data = _this6.getDataByString(item.getAttribute('data-bind-oneway'));
           if (item.getAttribute('type') === 'checkbox' || item.getAttribute('type') === 'radio') {
@@ -1297,23 +1284,21 @@ var aTemplate = function () {
       return this;
     }
   }, {
-    key: 'applyMethod',
+    key: "applyMethod",
     value: function applyMethod(method) {
-      var _method2;
-
-      for (var _len = arguments.length, args = Array(_len > 1 ? _len - 1 : 0), _key = 1; _key < _len; _key++) {
+      var _this$method;
+      for (var _len = arguments.length, args = new Array(_len > 1 ? _len - 1 : 0), _key = 1; _key < _len; _key++) {
         args[_key - 1] = arguments[_key];
       }
-
-      return (_method2 = this.method)[method].apply(_method2, args);
+      return (_this$method = this.method)[method].apply(_this$method, args);
     }
   }, {
-    key: 'getComputedProp',
+    key: "getComputedProp",
     value: function getComputedProp(prop) {
       return this.data[prop].apply(this);
     }
   }, {
-    key: 'remove',
+    key: "remove",
     value: function remove(path) {
       var object = this.data;
       var stack = path.split('.');
@@ -1329,30 +1314,24 @@ var aTemplate = function () {
       return this;
     }
   }]);
-
-  return aTemplate;
 }();
 
-exports.default = aTemplate;
-module.exports = exports['default'];
-
 },{"./util":4,"ie-array-find-polyfill":1,"morphdom":2}],4:[function(require,module,exports){
-'use strict';
+"use strict";
 
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
+exports.selector = exports.on = exports.off = exports.matches = exports.findAncestor = void 0;
 var matches = exports.matches = function matches(element, query) {
   var matches = (element.document || element.ownerDocument).querySelectorAll(query);
   var i = matches.length;
   while (--i >= 0 && matches.item(i) !== element) {}
   return i > -1;
 };
-
 var selector = exports.selector = function selector(_selector) {
   return document.querySelector(_selector);
 };
-
 var findAncestor = exports.findAncestor = function findAncestor(element, selector) {
   if (typeof element.closest === 'function') {
     return element.closest(selector) || null;
@@ -1365,12 +1344,9 @@ var findAncestor = exports.findAncestor = function findAncestor(element, selecto
   }
   return null;
 };
-
 var listenerList = [];
-
 var on = exports.on = function on(element, query, eventNames, fn) {
   var capture = arguments.length > 4 && arguments[4] !== undefined ? arguments[4] : false;
-
   var events = eventNames.split(' ');
   events.forEach(function (event) {
     var listener = function listener(e) {
@@ -1380,11 +1356,16 @@ var on = exports.on = function on(element, query, eventNames, fn) {
         fn(e);
       }
     };
-    listenerList.push({ listener: listener, element: element, query: query, event: event, capture: capture });
+    listenerList.push({
+      listener: listener,
+      element: element,
+      query: query,
+      event: event,
+      capture: capture
+    });
     element.addEventListener(event, listener, capture);
   });
 };
-
 var off = exports.off = function off(element, query, eventNames) {
   var events = eventNames.split(' ');
   events.forEach(function (event) {
