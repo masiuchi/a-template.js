@@ -19,11 +19,12 @@
   },
   "main": "./lib/index.js",
   "devDependencies": {
-    "babel-cli": "^6.18.0",
-    "babel-plugin-add-module-exports": "^0.2.1",
-    "babel-preset-es2015": "^6.18.0",
-    "babelify": "^7.3.0",
-    "browserify": "^13.1.1",
+    "@babel/cli": "^7.21.0",
+    "@babel/core": "^7.21.0",
+    "@babel/preset-env": "^7.21.0",
+    "babel-plugin-add-module-exports": "^1.0.4",
+    "babelify": "^10.0.0",
+    "browserify": "^17.0.0",
     "chokidar-cli": "^3.0.0",
     "co": "^4.6.0",
     "eslint": "^8.57.1",
@@ -36,7 +37,7 @@
     "licensify": "^3.1.2",
     "node-cmd": "^2.0.0",
     "np": "^10.0.7",
-    "uglifyjs": "^2.4.10"
+    "uglify-js": "^3.14.0"
   },
   "dependencies": {
     "ie-array-find-polyfill": "^1.1.0",
